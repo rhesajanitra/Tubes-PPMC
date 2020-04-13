@@ -3,6 +3,7 @@
 #include <string.h>
 #include <conio.h>
 
+//DEKLARASI STRUCT DAN LINKED LIST
 struct Node{
 	 char* key;
 	 char* value;
@@ -16,7 +17,8 @@ struct Key{
 struct MyData{
 	char StringKey[50];};
 	
-//Prosedur mencetak list
+
+//DEKLARASI FUNGSI DAN PROSEDUR
 void PrintList(struct Node* X){
 	while (X != NULL){
 		printf("Key: %s ,", X->key);
@@ -46,7 +48,7 @@ void InsertKey (struct Node** head, struct MyData n[10000], int JumlahKey, int N
 	temp->next = nodebaru;}}
 	
 	
-//Memasukkan value dari key[1000] ke dalam linked list
+//Memasukkan value ke linked list
 void InsertValue (struct Node** head, struct MyData key[10000], int JumlahKey, int N){
 	struct Node* temp = *head;
 	int i;
@@ -60,7 +62,7 @@ void InsertValue (struct Node** head, struct MyData key[10000], int JumlahKey, i
 		temp->value = str;
 		temp=temp->next;}}
 
-	
+//MAIN PROGRAM	
 int main(){
 	//Inisialisasi File
 	FILE* fp;
