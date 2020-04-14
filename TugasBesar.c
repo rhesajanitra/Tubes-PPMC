@@ -156,7 +156,7 @@ int main(){
             printf("Anda berhasil keluar program, selamat jalan dan terimakasih!\n");
         }
 
-	fclose(fp);
+	fclose(fp);}
 	return 0;
 }
 
