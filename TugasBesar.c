@@ -88,7 +88,7 @@ int main(){
 	FILE* fp;
 
     int pilihan;
-
+    printf("-----------------------------------------------------------------------------\n");
     printf("Selamat datang di N-Gram Word Prediction based on NLP Program by Kelompok C2 \n");
     printf("-----------------------------------------------------------------------------\n");
     printf("Program Description : ");
@@ -149,6 +149,10 @@ int main(){
         
         printf("KEY    dan     VALUE\n");
         PrintList(nodal);
+	//Debugging
+	printf("Test isUnique \n");
+        printf("Coba pertama untuk kata The water pipes , hasil : %d ", isUnique("The water pipes", nodal));
+		
         }
 
         else
