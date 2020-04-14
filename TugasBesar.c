@@ -82,6 +82,73 @@ int isUnique(char input[50],struct Node*head)
     }
 }
 
+void randomizer(char string[50], struct Node* head){
+  struct tabel{
+    char value[20];
+    int freq;
+  };
+  
+  int i=0;
+  int j=0;
+  int k=0;
+  struct tabel tabel_value[10];
+  
+  
+  //mengisi tabel value dan frekuensinya
+  while (head!=NULL)
+  {
+    if (string[50]==temp->key)
+    {
+      if (i==0)
+      {
+        tabel_value[0].value=head->value;
+        tabel_value[0].freq = 1;
+        i += 1;
+      }
+      if (i==1)
+      {
+        while(j<=i)
+          if (head->value==tabel_value[j].value)
+          {
+            tabel_value[j].freq += 1;
+            j+=99;
+          }
+          else
+          {
+            j+=1;
+          }
+        if (j>i && j<99)
+        {
+          tabel_value[j].value=head->value;
+          tabel_value[j].freq = 1;
+          i += 1;
+        }
+      }
+    }
+    head=head->next;
+    j=0;
+  }
+  int jml_val = 0
+  while (tabel_value[k]!=NULL){
+    int jml_val += tabel_value[k].freq;
+    k += 1;
+  }
+  
+  int num = (rand() % 
+           (jml_val + 1)); 
+  
+  int l=0;
+  while (num>=0){
+    num -= tabel_value[l].freq;
+    if (num<=0)
+    {
+      printf("%s", tabel_value[l]);
+    }
+    l += 1;
+  }
+
+  
+}
 //MAIN PROGRAM	
 int main(){
 	//Inisialisasi File
