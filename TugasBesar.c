@@ -61,6 +61,26 @@ void InsertValue (struct Node** head, struct MyData key[10000], int JumlahKey, i
 			strcpy(str, key[i+N+1].StringKey);}
 		temp->value = str;
 		temp=temp->next;}}
+int isUnique(char input[50],struct Node*head)
+{
+    int unik=0;
+    while ((head!=NULL) && (unik<2))
+    {
+        if (strcmp(head->key,input)==0)
+        {
+            unik = unik + 1;
+        }
+        head=head->next;
+    }
+    if (unik==1)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
 
 //MAIN PROGRAM	
 int main(){
