@@ -101,7 +101,7 @@ void randomizer(char str[50], struct Node* head){
       j=j+1;
   }
     hasil_random = (rand() % (i));
-    printf("%s ",temp[hasil_random].value);
+    printf(" %s",temp[hasil_random].value);
     return;
 }
 void print_Hasil(int jumlah_kata,char str[50],struct Node* head)
@@ -118,12 +118,11 @@ void print_Hasil(int jumlah_kata,char str[50],struct Node* head)
     {
         if (isUnique((temp->key),head)==1)
         {
-            printf("%s %s ",temp->key,temp->value);
+            printf(" %s",temp->value);
 
         }
         else
         {
-            printf("%s ",temp->key);
             randomizer(temp->key,head);
         }
         i= i +1;
