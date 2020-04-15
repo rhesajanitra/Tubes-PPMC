@@ -145,71 +145,108 @@ int main(){
 	FILE* fp;
 
     int pilihan;
-    printf("-----------------------------------------------------------------------------\n");
+    printf("\n-----------------------------------------------------------------------------\n");
     printf("Selamat datang di N-Gram Word Prediction based on NLP Program by Kelompok C2 \n");
     printf("-----------------------------------------------------------------------------\n");
-    printf("Program Description : ");
+    printf("\n------------------------------------------Program Description--------------------------------------------\n");
     printf("Program ini mampu mengolah data string dari file external dengan ekstensi .txt sebanyak maksimal 10000 kata.\n");
     printf("Setiap string tersebut akan diproses sesuai dengan N-Gram yang dipilih oleh user ke dalam bentuk key and value.\n");
     printf("User mencetak kata - kata random sejumlah kata yang diinginkan dan dimulai dari kata sesuai dengan input user.\n");
     pilihan = 0;
+    
     while(pilihan !=2){
+        printf("\n\n----------Main Menu------------\n");
         printf("Silahkan pilih menu berikut.\n");
-        printf("1. Input file .txt dn mulai program\n");
+        printf("1. Input file .txt dan mulai program\n");
         printf("2. Keluar Program\n");
         
-        printf("Masukkan angka 1 atau 2 : ");
+        printf("Pilihan Menu (angka 1 atau 2) : ");
         scanf("%d", &pilihan);
 
         if (pilihan == 1)
         {
-    	fp = fopen("input2.txt", "r");
-	    int N;
-	
-	    //Inisialisasi elemen pertama dari linked list
-	    struct Node* nodal = (struct Node*) malloc (sizeof(struct Node));
-	    nodal->key = "Inisialisasi";
-	    nodal->value = "Inisialisasi";
-	    nodal->jumlah = 1;
-	    nodal->next = NULL;
-	
-	    //key[1000] berfungsi untuk menyimpan kata per kata yang dibaca dari file
-	    struct MyData key[10000];
-	
-	    //char dataku berfungsi untuk menyimpan tiap kata yang terbaca (menyimpan 1 kata saja secara temporary).
-	    char dataku[50];
-	
-	    //Membaca data dan memasukkan ke dalam array key[1000]
-	    int JumlahKey = 0;
-	    while (fscanf(fp, "%s", dataku)==1){
-		strcpy(key[JumlahKey].StringKey, dataku);
-		JumlahKey++;}
-        printf("Teks yang terbaca: \n");
-        printf("\n");
-        for (int i=0; i<JumlahKey; i++){
-            printf("%s ", key[i].StringKey);}
-        printf("\n");
-        printf("\n");
+            char file[30], sampah[20];
+            gets(sampah);
+            printf("Anda memilih untuk input file, silahkan masukkan nama file : ");
+            gets(&file);
+            fp = fopen(file, "r");
+
+            int N;
         
-        //Input nilai N
-        printf("Masukkan N: "); scanf("%d", &N);
-        printf("\n");
+            //Inisialisasi elemen pertama dari linked list
+            struct Node* nodal = (struct Node*) malloc (sizeof(struct Node));
+            nodal->key = "Inisialisasi";
+            nodal->value = "Inisialisasi";
+            nodal->jumlah = 1;
+            nodal->next = NULL;
         
-        //InsertKey bertugas memasukkan key ke dalam linked list
-        InsertKey(&nodal, key, JumlahKey, N-1);
+            //key[1000] berfungsi untuk menyimpan kata per kata yang dibaca dari file
+            struct MyData key[10000];
         
-        //Menghapus nodal pertama (inisialisasi)
-        nodal = nodal->next;
+            //char dataku berfungsi untuk menyimpan tiap kata yang terbaca (menyimpan 1 kata saja secara temporary).
+            char dataku[50];
         
-        //InsertValue bertugas memasukkan value ke dalam linked list
-        InsertValue(&nodal, key, JumlahKey, N-1);
-        
-        printf("KEY    dan     VALUE\n");
-        PrintList(nodal);
-	//Debugging
-	printf("Test isUnique \n");
-        printf("Coba pertama untuk kata The water pipes , hasil : %d ", isUnique("The water pipes", nodal));
-		
+            //Membaca data dan memasukkan ke dalam array key[1000]
+            int JumlahKey = 0;
+            while (fscanf(fp, "%s", dataku)==1){
+            strcpy(key[JumlahKey].StringKey, dataku);
+            JumlahKey++;}
+                       
+            //Input nilai N
+            printf("Masukkan N (berapa N-gram) : "); scanf("%d", &N);
+            
+            //InsertKey bertugas memasukkan key ke dalam linked list
+            InsertKey(&nodal, key, JumlahKey, N-1);
+            
+            //Menghapus nodal pertama (inisialisasi)
+            nodal = nodal->next;
+            
+            //InsertValue bertugas memasukkan value ke dalam linked list
+            InsertValue(&nodal, key, JumlahKey, N-1);
+            
+            int pilihmenu;
+            while(pilihmenu!=4){
+            printf("\n--Menu Program--\n");
+            printf("1. Tampilkan Teks yang terbaca \n");
+            printf("2. Tampilkan Tabel Daftar Key dan Value \n");
+            printf("3. Mulai proses cetak random word. (dapat diulangi) \n");
+            printf("4. Keluar sekuens dan kembali ke main menu. \n");
+            printf("Pilihan Menu (angka) : ");
+            scanf("%d", &pilihmenu); 
+            
+            if (pilihmenu == 1)
+            {
+                printf("Teks yang terbaca: \n");
+                printf("\n");
+                
+                for (int i=0; i<JumlahKey; i++){
+                    printf("%s ", key[i].StringKey);}
+                    printf("\n");
+                }
+            else if (pilihmenu == 2)
+                {
+                        printf("KEY    dan     VALUE\n");
+                        PrintList(nodal);
+                }
+
+            else if (pilihmenu == 3)
+                {
+                        //Proses mencetak huruf - huruf random
+                        int numinput; char userinput[30];
+                        printf("\nMasukkan Jumlah Random Words yang ingin di cetak : ");
+                        scanf("%d", &numinput);
+                        gets(sampah);
+                        printf("Masukkan string awalan anda : ");
+                        gets(userinput);
+
+                        printf("\n-----Hasil processing-----\n");
+
+                        printf("\n... %s",userinput);
+                        print_Hasil(numinput, userinput, nodal);
+                        printf(" ...\n");
+                }
+            else 
+                { printf("Anda keluar dari sekuens ini. Silahkan kembali ke main menu.\n");}}
         }
 
         else
