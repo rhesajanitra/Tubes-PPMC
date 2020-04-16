@@ -241,9 +241,12 @@ int main(){
                         printf("\nMasukkan Jumlah Random Words yang ingin di cetak : ");
                         scanf("%d", &numinput);
                         gets(sampah);
-                        printf("Masukkan string awalan anda : ");
-                        gets(userinput);
-
+		   	int pilihrandom = (rand () % (JumlahKey));
+                        struct Node* awal;
+                        awal = nodal;
+                        for (int i = 0; i<pilihrandom; i++){
+				awal = awal->next;}
+			strcpy (userinput, awal->key);
                         printf("\n-----Hasil processing-----\n");
 
                         printf("\n... %s",userinput);
