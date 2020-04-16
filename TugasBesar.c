@@ -61,26 +61,30 @@ void InsertValue (struct Node** head, struct MyData key[10000], int JumlahKey, i
 			strcpy(str, key[i+N+1].StringKey);}
 		temp->value = str;
 		temp=temp->next;}}
+//Fungsi untuk menentukan apakah suatu key unik 
 int isUnique(char input[50],struct Node*head)
 {
-    int unik=0;
+    int unik=0; // inisialisasi
     while ((head!=NULL) && (unik<2))
     {
         if (strcmp(head->key,input)==0)
         {
-            unik = unik + 1;
+            unik = unik + 1; // Jika ketemu yang sama, unik ++
         }
-        head=head->next;
+        head=head->next; // ke bagian selanjutnya
     }
+//Jika Unik(1 key dalam daftar key-value), maka return 1
     if (unik==1)
     {
         return 1;
     }
+//Jika tidak, return 0
     else
     {
         return 0;
     }
 }
+// Prosedur untuk merandom value yang dipilih apabila terdapat beberapa key yang sama
 void randomizer(char str[50], struct Node* head){
   struct data
   {
@@ -94,38 +98,40 @@ void randomizer(char str[50], struct Node* head){
   {
       if (strcmp(str,head->key)==0)
       {
-          strcpy((temp[i].value),(head->value));
+          strcpy((temp[i].value),(head->value));//Memasukkan ke array berisi value
           i=i+1;
       }
       head=head->next;
       j=j+1;
   }
-    hasil_random = (rand() % (i));
-    printf(" %s",temp[hasil_random].value);
+    hasil_random = (rand() % (i));// Memilih index random dari array value dari key yang sama
+    printf(" %s",temp[hasil_random].value); // Menulis hasil random
     return;
 }
+//Prosedur menulis hasil akhir sesuai request user
 void print_Hasil(int ngram, int jumlah_kata,char str[50],struct Node* head)
 {
     struct Node* temp;
     int i=1;
     temp = head;
     int hasil;
-    while (strcmp(str,temp->key)!=0)
+    while (strcmp(str,temp->key)!=0) //mencari titik mulai penulisan 
     {
         temp = temp->next;
     }
     while (i<=jumlah_kata-ngram)
     {
-        if (isUnique((temp->key),head)==1)
+        if (isUnique((temp->key),head)==1) // Jika Unik, tulis value
         {
             printf(" %s",temp->value);
 
         }
         else
         {
-            randomizer(temp->key,head);
+            randomizer(temp->key,head); // Jika tidak, value dirandom
         }
         i= i +1;
+	//Jika sudah ujung, putar ke awal lagi
         if (temp->next==NULL)
         {
             temp=head;
