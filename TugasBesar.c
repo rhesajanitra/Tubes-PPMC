@@ -104,7 +104,7 @@ void randomizer(char str[50], struct Node* head){
     printf(" %s",temp[hasil_random].value);
     return;
 }
-void print_Hasil(int jumlah_kata,char str[50],struct Node* head)
+void print_Hasil(int ngram, int jumlah_kata,char str[50],struct Node* head)
 {
     struct Node* temp;
     int i=1;
@@ -114,7 +114,7 @@ void print_Hasil(int jumlah_kata,char str[50],struct Node* head)
     {
         temp = temp->next;
     }
-    while (i<=jumlah_kata)
+    while (i<=jumlah_kata-ngram)
     {
         if (isUnique((temp->key),head)==1)
         {
@@ -241,7 +241,7 @@ int main(){
                         printf("\n-----Hasil processing-----\n");
 
                         printf("\n... %s",userinput);
-                        print_Hasil(numinput, userinput, nodal);
+                        print_Hasil(N,numinput, userinput, nodal);
                         printf(" ...\n");
                 }
             else 
