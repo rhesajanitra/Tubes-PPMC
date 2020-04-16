@@ -84,12 +84,13 @@ int isUnique(char input[50],struct Node*head)
         return 0;
     }
 }
-// Prosedur untuk merandom value yang dipilih apabila terdapat beberapa key yang sama
-void randomizer(char str[50], struct Node* head){
+
+void randomizer(char str[50], struct Node* head, char* string){
   struct data
   {
-    char value[20];
+    char value[50];
   };
+  
   int i=0;
   int j=0;
   int hasil_random;
@@ -98,51 +99,49 @@ void randomizer(char str[50], struct Node* head){
   {
       if (strcmp(str,head->key)==0)
       {
-          strcpy((temp[i].value),(head->value));//Memasukkan ke array berisi value
+          strcpy((temp[i].value),(head->value));
           i=i+1;
       }
       head=head->next;
       j=j+1;
   }
-    hasil_random = (rand() % (i));// Memilih index random dari array value dari key yang sama
-    printf(" %s",temp[hasil_random].value); // Menulis hasil random
-    return;
+    hasil_random = (rand() % (i));
+    strcpy(string, (temp[hasil_random].value));
+return;
 }
-//Prosedur menulis hasil akhir sesuai request user
-void print_Hasil(int ngram, int jumlah_kata,char str[50],struct Node* head)
+
+void print_Hasil(int jumlah_kata, char str1[50],struct Node* head, int N)
 {
     struct Node* temp;
     int i=1;
     temp = head;
-    int hasil;
-    while (strcmp(str,temp->key)!=0) //mencari titik mulai penulisan 
-    {
-        temp = temp->next;
-    }
-    while (i<=jumlah_kata-ngram)
-    {
-        if (isUnique((temp->key),head)==1) // Jika Unik, tulis value
-        {
-            printf(" %s",temp->value);
-
-        }
-        else
-        {
-            randomizer(temp->key,head); // Jika tidak, value dirandom
-        }
-        i= i +1;
-	//Jika sudah ujung, putar ke awal lagi
-        if (temp->next==NULL)
-        {
-            temp=head;
-        }
-        else
-        {
-            temp=temp->next;
-        }
-    }
+    char* str = str1;
+    while (i<=jumlah_kata-N){
+		while (strcmp(str,temp->key)!=0){
+        temp = temp->next;}
+		char* string = (char*) malloc (50);
+		if (isUnique((temp->key),head)==1)
+		{
+			strcpy(string, temp->value);
+		}
+		else
+		{
+			randomizer(temp->key, head, string);
+		}
+		printf(" %s", string);
+		i= i +1;
+		char *res;
+		// Skip to first space
+		for (res = str ; *res && *res != ' ' ; res++)
+			;
+		// If we found a space, skip it too:
+		if (*res) res++;
+		strcpy(str, res);
+		if (N !=1){
+			strcat(str, " ");}
+		strcat(str, string);
+		temp = head;}
 }
-
 
 //MAIN PROGRAM	
 int main(){
@@ -209,7 +208,7 @@ int main(){
             //InsertValue bertugas memasukkan value ke dalam linked list
             InsertValue(&nodal, key, JumlahKey, N-1);
             
-            int pilihmenu;
+            int pilihmenu = 0;
             while(pilihmenu!=4){
             printf("\n--Menu Program--\n");
             printf("1. Tampilkan Teks yang terbaca \n");
@@ -250,7 +249,7 @@ int main(){
                         printf("\n-----Hasil processing-----\n");
 
                         printf("\n... %s",userinput);
-                        print_Hasil(N,numinput, userinput, nodal);
+                        print_Hasil(numinput, userinput, nodal, N);
                         printf(" ...\n");
                 }
             else 
