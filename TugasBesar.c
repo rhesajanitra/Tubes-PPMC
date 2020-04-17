@@ -96,7 +96,7 @@ void InsertValue (struct Node** head, struct MyData key[10000], int JumlahKey, i
 }
 		
 //Fungsi isUnique berfungsi untuk menentukan apakah suatu key unik 
-int isUnique(char input[50],struct Node*head)
+int isUnique(char input[1000],struct Node*head)
 {
     int unik = 0; // inisialisasi
     while ((head!=NULL) && (unik<2))
@@ -122,7 +122,7 @@ int isUnique(char input[50],struct Node*head)
 //Fungsi randomizer berfungsi untuk mengacak value apabila ditemukan lebih dari 1
 //Fungsi ini menyimpan value-value dari key yang sama dalam suatu array temp
 //Lalu mencetak salah satunya saja secara acak
-void randomizer(char str[50], struct Node* head, char* string){
+void randomizer(char str[1000], struct Node* head, char* string){
 	struct data
 	{
 	char value[50];
@@ -148,7 +148,7 @@ return;
 }
 
 //Fungsi print_Hasil berfungsi melakukan pencetakan random words sebanyak jumlah_kata - N
-void print_Hasil(int jumlah_kata, char str1[50],struct Node* head, int N)
+void print_Hasil(int jumlah_kata, char str1[1000],struct Node* head, int N)
 {
     struct Node* temp;
     int i = 1;
@@ -295,7 +295,7 @@ int main(){
             else if (pilihmenu == 3)
                 {
                         //Proses mencetak huruf - huruf random
-                        int numinput; char userinput[30]; struct Node* awal;
+                        int numinput; char userinput[1000]; struct Node* awal;
                         int pilihrandom = (rand () % (JumlahKey));
                         awal = nodal;
                         
@@ -317,14 +317,14 @@ int main(){
                         printf(" ...\n");
                 }
             else 
-                { printf("Anda keluar dari sekuens ini. Silahkan kembali ke main menu.\n");}}
+                { 	fclose(fp);
+					printf("Anda keluar dari sekuens ini. Silahkan kembali ke main menu.\n");}}
         }
 
         else
         {
             printf("Anda berhasil keluar program, selamat jalan dan terimakasih!\n");
         }
-
-	fclose(fp);}
+	}
 	return 0;
 }
